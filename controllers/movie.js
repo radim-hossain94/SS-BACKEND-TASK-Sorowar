@@ -29,3 +29,26 @@ exports.createMovie = async (req, res) =>{
         res.status(400).json(error.message);
     }
 }
+
+exports.all = async (req, res) => {
+  try {
+    const movie = await Movie.find({});
+    res.json(movie);
+  } catch (error) {
+    console.log(error);
+    res.json(error.message);
+  }
+};
+
+exports.getById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const movie = await Movie.findById(id);
+    console.log(movie);
+    res.json(movie);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error.message);
+  }
+};
